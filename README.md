@@ -1,0 +1,1 @@
+# curte-spate-slider
