@@ -10,22 +10,25 @@
 	   <script type="text/javascript">
         $(document).ready(function() {
 
-        	var firstFail = -1;
-        	for (var idx = 0; idx < 30; idx ++) {
-        		$.ajax({
-					    url:'spate-'+idx+'.jpeg',
+        	var lastSuccess = -1;
+        	for (var idx = 1; idx < 30; idx ++) {
+        		$.ajax({ 
+        				async: false,
+					    url:'https://sorinslavic.github.io/curte-spate-slider/spate-'+idx+'.jpeg',
 					    type:'GET',
 					    error: function() {
-					    	firstFail=idx;
-				            idx=100;
+					    	idx=100;
 					    },
 					    success: function() {
 		    	        	$('#imgContainer').prepend($('<img>', {id:'img'+idx, src:'spate-'+idx+'.jpeg'}));
+		    	        	if (idx > lastSuccess) {
+  		    	        		lastSuccess=idx;
+  		    	        	}
 					    }
 					});
         	}
-        	$('#slider').val(firstFail*10);
-        	$('#slider').attr('max', firstFail*10);
+        	$('#slider').val(10);
+        	$('#slider').attr('max', (lastSuccess+1)*10);
 
             //Step 1: set up the slider with some options. The valid values for opacity are 0 to 1
             //Step 2: Bind an event so when you slide the slider and stop, the following function gets called
@@ -33,15 +36,18 @@
             	var slx = parseInt($('#slider').val());
             	var idx = parseInt(slx/10, 10);
 
-            	console.log($('#img' + idx));
-            	for (var i = 1; i < firstFail; i ++) {
+            	for (var i = 0; i <= lastSuccess; i ++) {
             		$('#img' + i).css('opacity', 0);
             	}
 
-            	$('#img' + (idx-1)).css('opacity', 1-((slx%10))/10);
-            	$('#img' + idx).css('opacity', (slx%10)/10);
+            	if (slx == 0) {
+            		$('#img' + idx).css('opacity', 1);
+            	} else {
+	            	$('#img' + (idx-1)).css('opacity', 1-((slx%10))/10);
+    	        	$('#img' + idx).css('opacity', (slx%10)/10);
+    	        }
 
-            	$('#sliderx').val(slx);
+            	$('#sliderx').val(idx);
             });
 
 
@@ -49,20 +55,20 @@
     </script>
 
     <style type="text/css">
-        #slider { width: 500px; left: 10px; height: 100px;}
+        #slider { width: 500px; left: 10px;}
 
-        img {position: absolute;  left: 50px;  top: 100px;  width: 1200px; height: 650px; border: 1px solid black;}
+        img {position: absolute;  left: 20px;  top: 20px;  width: 900px; height: 450px; border: 1px solid black;}
     </style>
 
 </head>
 <body>
 
-	<div id="imgContainer" style="height: 700px">
+	<div id="imgContainer" style="height: 500px">
 
 	</div>
 	<div>
-	  <input type="range" id="slider" name="slider" min="20" max="120" value="20">
-	  <input type="text" id="sliderx" value=20>
+	  <input type="range" id="slider" name="slider" min="10" max="120" value="10">
+	  <input type="text" id="sliderx" value=1>
 
 	</div>
 
