@@ -3,12 +3,33 @@
 <head>
 	<title></title>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
 
+	<script type="text/javascript">		
+$('#img1').st
+	</script>
 
 	   <script type="text/javascript">
         $(document).ready(function() {
+
+        	var firstFail = -1;
+        	for (var idx = 0; idx < 30; idx ++) {
+        		$.ajax({
+					    url:'spate-'+idx+'.jpeg',
+					    type:'GET',
+					    error: function() {
+					    	firstFail=idx;
+				            idx=100;
+					    },
+					    success: function() {
+		    	        	$('#imgContainer').prepend($('<img>', {id:'img'+idx, src:'spate-'+idx+'.jpeg'}));
+					    }
+					});
+        	}
+        	$('#slider').val(firstFail*10);
+        	$('#slider').attr('max', firstFail*10);
+
             //Step 1: set up the slider with some options. The valid values for opacity are 0 to 1
             //Step 2: Bind an event so when you slide the slider and stop, the following function gets called
             $('#slider').bind('input', function() {
@@ -16,7 +37,7 @@
             	var idx = parseInt(slx/10, 10);
 
             	console.log($('#img' + idx));
-            	for (var i = 1; i < 100; i ++) {
+            	for (var i = 1; i < firstFail; i ++) {
             		$('#img' + i).css('opacity', 0);
             	}
 
@@ -31,7 +52,7 @@
     </script>
 
     <style type="text/css">
-        #slider { width: 500px; left: 10px;}
+        #slider { width: 500px; left: 10px; height: 100px;}
 
         img {position: absolute;  left: 50px;  top: 100px;  width: 1200px; height: 650px; border: 1px solid black;}
     </style>
@@ -39,25 +60,14 @@
 </head>
 <body>
 
-   <div>
-  <input type="range" id="slider" name="slider" min="20" max="130" value="20">
-  <input type="text" id="sliderx" value=20>
+	<div id="imgContainer" style="height: 700px">
 
-</div>
-<div id="logoContainer"  >
-	
-  <img id="img12" src="spate-12-gard-jos.jpeg">
-  <img id="img11" src="spate-11-acces-poarta.jpeg">
-  <img id="img10" src="spate-10-cofraj-poarta.jpeg">
-  <img id="img9" src="spate-9-cofraje-stalpi.jpeg">
-  <img id="img8" src="spate-8-plaga-garaj.jpeg">
-  <img id="img7" src="spate-7-gard-lateral.jpeg">
-  <img id="img6" src="spate-6-excavator-gard-lateral.jpeg">
-  <img id="img5" src="spate-5-gard-incomplet.jpeg">
-  <img id="img4" src="spate-4-gauri-gard.jpeg">
-  <img id="img3" src="spate-3-beton.jpeg">
-  <img id="img2" src="spate-2-santuri.jpeg">
-  <img id="img1" src="spate-1-gol.jpg">
-</div>
+	</div>
+	<div>
+	  <input type="range" id="slider" name="slider" min="20" max="120" value="20">
+	  <input type="text" id="sliderx" value=20>
+
+	</div>
+
 </body>
 </html>
