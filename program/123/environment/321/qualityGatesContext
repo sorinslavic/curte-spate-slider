@@ -1,3 +1,37 @@
 {
-"bau"
+  "programId": "164952",
+  "environmentId": "300606",
+  "pipelineId": "768752",
+  "executionId": "354303",
+  "releaseId": "3998",
+  "imsOrgId": "EA8929D25DE8B9B20A494110@AdobeOrg",
+  "releaseTestArtifact": "com.adobe.cq.cloud:com.adobe.cq.cloud.testing.it.smoke:0.18.0",
+  "customTestArtifact": "https://cm0wa10pl0stor0dev.file.core.windows.net/d8b2963b-1237-45f9-9832-4d7788cd6207/build/aem-cmrubiknimutransformenabled-project.it.tests-0.0.1-SNAPSHOT-jar-with-dependencies.jar?sig=k%2BRPVr8ZaLI07mzMywbfk02MCvdwnbXByp9I%2FTEzoyM%3D&se=2023-02-07T09%3A28%3A50Z&sv=2019-02-02&rsct=application%2Foctet-stream&rscd=attachment%3B%20filename%3Dbuild%2Faem-cmrubiknimutransformenabled-project.it.tests-0.0.1-SNAPSHOT-jar-with-dependencies.jar&sp=r&sr=f",
+  "instances": [{
+      "type": "AEM",
+      "id": "author-id",
+      "url": "https://author-p164952-e300606-cmdev.adobeaemcloud.net",
+      "runmodes": ["author"],
+      "users": [{
+          "role": "admin",
+          "credentials": {
+            "type": "basic",
+            "user": "admin",
+            "password": "admin"
+          }
+        }]
+    }, {
+      "type": "AEM",
+      "id": "publish-id",
+      "url": "https://publish-p164952-e300606-cmdev.adobeaemcloud.net",
+      "runmodes": ["publish"],
+      "users": [{
+          "role": "admin",
+          "credentials": {
+            "type": "basic",
+            "user": "admin",
+            "password": "admin"
+          }
+        }]
+    }]
 }
